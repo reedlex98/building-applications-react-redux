@@ -25,8 +25,16 @@ function ManageCoursePage({ authors, courses, loadCourses, loadAuthors, ...props
         }
     }, []);
 
+    function handleChange(event) {
+        const { name, value } = event.target
+        setCourse(prevCourse => ({
+            ...prevCourse,
+            [name]: name === "authorId" ? parseInt(value, 10) : value
+        }))
+    }
+
     return (
-        <CourseForm course={course} authors={authors} errors={errors}/>
+        <CourseForm course={course} onChange={handleChange} authors={authors} errors={errors} />
     )
 }
 
