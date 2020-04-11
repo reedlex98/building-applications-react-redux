@@ -17,12 +17,12 @@ class CoursesPage extends Component {
 
     handleSubmit = event => {
         event.preventDefault()
-        this.props.dispatch(courseActions.createCourse(this.state.course))
-        this.setState({course: {title:""}})
+        this.props.createCourse(this.state.course)
+        this.setState({ course: { title: "" } })
     }
 
     render() {
-        const {courses} = this.props
+        const { courses } = this.props
 
         return (
             <form onSubmit={this.handleSubmit}>
@@ -30,14 +30,14 @@ class CoursesPage extends Component {
                 <h3>Add Course</h3>
                 <input type="text" onChange={this.handleChange} value={this.state.course.title} />
                 <input type="submit" value="Save" />
-                {courses.map(course => <div key={course.title}>{course.title}</div> )}
+                {courses.map((course, i) => <div key={i}>{course.title}</div>)}
             </form>
         )
     }
 }
 
 CoursesPage.propTypes = {
-    dispatch: PropTypes.func.isRequired,
+    createCourse: PropTypes.func.isRequired,
     courses: PropTypes.array.isRequired
 }
 
@@ -47,4 +47,10 @@ function mapStateToProps({ courses }) {
     }
 }
 
-export default connect(mapStateToProps)(CoursesPage)
+function mapDispatchToProps(dispatch) {
+    return {
+        createCourse: course => dispatch(courseActions.createCourse(course))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(CoursesPage)
