@@ -1,4 +1,4 @@
-import {CREATE_COURSE} from '../actions/actionTypes'
+import { CREATE_COURSE } from '../actions/actionTypes'
 
 export default function courseReducer(state = [], action) {
     switch (action.type) {
