@@ -50,7 +50,7 @@ function mapStateToProps({ courses, authors }) {
                 }
             }),
         authors
-    }
+    }   
 }
 
 function mapDispatchToProps(dispatch) {
