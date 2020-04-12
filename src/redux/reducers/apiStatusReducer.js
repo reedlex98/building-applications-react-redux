@@ -11,4 +11,5 @@ export default function authorReducer(state = initialState.apiCallsInProgress, a
     } else if (actionTypeEndsInSuccess(action.type)){
         return state - 1
     }
+    return state
 }

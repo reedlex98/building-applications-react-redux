@@ -1,6 +1,6 @@
-import {BEGIN_API_CALL} from './actionTypes'
+import { BEGIN_API_CALL } from './actionTypes'
 
-export function beginApiCall(){
+export function beginApiCall() {
     return {
         type: BEGIN_API_CALL
     }
