@@ -7,7 +7,7 @@ import ManageCoursePage from './courses/ManageCoursePage'
 import Header from './common/Header'
 import PageNotFound from './PageNotFound'
 
-export default function App() {
+function App() {
     return (
         <div className="container-fluid">
             <Header />
@@ -22,3 +22,5 @@ export default function App() {
         </div>
     )
 }
+
+export default App

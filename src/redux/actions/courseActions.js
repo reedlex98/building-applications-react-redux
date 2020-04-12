@@ -8,17 +8,17 @@ export function loadCourseSuccess(courses) {
     }
 }
 
-export function createCourseSuccess(courses) {
+export function createCourseSuccess(course) {
     return {
         type: CREATE_COURSE_SUCCESS,
-        courses
+        course
     }
 }
 
-export function updateCourseSuccess(courses) {
+export function updateCourseSuccess(course) {
     return {
         type: UPDATE_COURSE_SUCCESS,
-        courses
+        course
     }
 }
 
