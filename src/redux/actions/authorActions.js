@@ -1,6 +1,6 @@
 import { LOAD_AUTHORS_SUCCESS } from './actionTypes'
 import * as authorApi from '../../api/authorApi'
-import { beginApiCall } from './apiStatusActions'
+import { beginApiCall, apiCallError } from './apiStatusActions'
 
 export function loadAuthorsSuccess(authors) {
     return {
@@ -17,6 +17,7 @@ export function loadAuthors() {
                 dispatch(loadAuthorsSuccess(authors))
             })
             .catch(err => {
+                dispatch(apiCallError(err))
                 throw err
             })
     }

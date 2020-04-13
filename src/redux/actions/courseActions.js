@@ -1,6 +1,6 @@
-import { LOAD_COURSES_SUCCESS, CREATE_COURSE_SUCCESS, UPDATE_COURSE_SUCCESS } from './actionTypes'
+import { LOAD_COURSES_SUCCESS, CREATE_COURSE_SUCCESS, UPDATE_COURSE_SUCCESS, DELETE_COURSE_OPTIMISTIC } from './actionTypes'
 import * as courseApi from '../../api/courseApi'
-import { beginApiCall } from './apiStatusActions'
+import { beginApiCall, apiCallError } from './apiStatusActions'
 
 export function loadCourseSuccess(courses) {
     return {
@@ -23,6 +23,13 @@ export function updateCourseSuccess(course) {
     }
 }
 
+export function deleteCourseOptimistic(course) {
+    return {
+        type: DELETE_COURSE_OPTIMISTIC,
+        course
+    }
+}
+
 export function loadCourses() {
     return function (dispatch) {
         dispatch(beginApiCall())
@@ -31,6 +38,7 @@ export function loadCourses() {
                 dispatch(loadCourseSuccess(courses))
             })
             .catch(err => {
+                dispatch(apiCallError(err))
                 throw err
             })
     }
@@ -48,7 +56,17 @@ export function saveCourse(course) {
                 : dispatch(createCourseSuccess(savedCourse))
             })
             .catch(err => {
+                dispatch(apiCallError(err))
                 throw err
             })
+    }
+}
+
+export function deleteCourse(course) {
+    return function (dispatch) {
+        // Doing optimistic delete, so not dispatching begin/end api call
+        // actions, or apiCallError action since we're not showing the loading status for this
+        dispatch(deleteCourseOptimistic(course))
+        return courseApi.deleteCourse(course.id)
     }
 }
